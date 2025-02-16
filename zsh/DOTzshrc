@@ -1,0 +1,43 @@
+#------------------------------
+# Generic alias
+#------------------------------
+
+alias cat="bat"
+alias ls="exa --icons --long --group-directories-first"
+alias find="fd"
+
+#------------------------------
+# History
+#------------------------------
+
+HISTFILE=~/.zsh_history
+HISTSIZE=100000 # 100_000
+SAVEHIST=100000 # 100_000
+
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
+[[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
+
+#------------------------------
+# Prompt theme
+#------------------------------
+
+autoload -Uz promptinit
+promptinit
+
+prompt redhat
+
+#------------------------------
+# Plugins
+#------------------------------
+
+# Github: https://github.com/zsh-users/zsh-syntax-highlighting
+# Description: Makes commands easier to read by coloring them
+source "${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
